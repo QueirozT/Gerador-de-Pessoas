@@ -14,7 +14,7 @@ target = Executable(
 setup(
 	name = "Gerador de Pessoas",
 	version = "1.0",
-	description = "Um programa simples que gera dados de pessoas aleatórias",
+	description = "Um programa simples que gera dados falsos de pessoas",
 	author = "Tiago Q. Gonçalves",
 	options = {'build_exe' : {'include_files' : files}},
 	executables = [target]
