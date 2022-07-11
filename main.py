@@ -14,10 +14,16 @@ Comandos Utilizados:
     Conversão de arquivo .ui:
         pyuic5 GUI.ui -o display.py
 
-O Cx_freeze é um módulo que permite gerar um arquivo executável do python.
-Para gerar o arquivo executável, é preciso criar um arquivo setup.py com as configurações do programa.
-Após gerar o arquivo setup.py, é preciso executar o comando:
-    python setup.py build
+Usando o CX_Freeze:
+    O Cx_freeze é um módulo que permite gerar um arquivo executável do python.
+    Para gerar o arquivo executável, é preciso criar um arquivo setup.py com as configurações do programa.
+    Após gerar o arquivo setup.py, é preciso executar o comando:
+        python setup.py build
+
+Usando o Pyinstaller:
+    O Pyinstaller é um módulo que permite gerar um arquivo executável do python.
+    Para gerar o arquivo executável, basta executar o comando:
+        pyinstaller --noconsole --name="Gerador_de_Pessoas" --icon="icon.ico" --onefile main.py
 """
 from web_scraping import gerar_pessoa
 from display import *
