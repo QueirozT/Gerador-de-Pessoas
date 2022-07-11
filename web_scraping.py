@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 def gerar_pessoa():
     """
@@ -22,8 +23,9 @@ def gerar_pessoa():
         data_nascimento = html.select_one("section:nth-child(2) h2+ .form-group .form-control")
         data_nascimento = str(data_nascimento).replace('<input class="form-control" type="text" value="', '').replace('"/>', '')
 
-        idade = html.select_one("section:nth-child(2) .form-group:nth-child(3) .form-control")
-        idade = str(idade).replace('<input class="form-control" type="text" value="', '').replace('"/>', '')
+        nascimento = datetime.strptime(data_nascimento, '%d/%m/%Y')
+        atual = datetime.today()
+        idade = str(round((atual - nascimento).days / 365.25))
 
         cep = html.select_one("section:nth-child(3) h2+ .form-group .form-control")
         cep = str(cep).replace('<input class="form-control" type="text" value="', '').replace('"/>', '')
@@ -70,4 +72,19 @@ def gerar_pessoa():
         return pessoa
 
 if __name__ == "__main__":
-    print(gerar_pessoa())
+    teste = gerar_pessoa()
+
+    # Converte uma string para o tipo data usando o padrão passado no segundo argumento.
+    data = datetime.strptime(teste['data_nascimento'], '%d/%m/%Y')
+    print("Data Do Script: ", data)
+
+    data_atual = datetime.today()
+    print("Data Do Sistema: ", data_atual)
+
+    idade = (data_atual - data).days / 365.25
+    print("Idade Calculada: ", round(idade))
+
+    # # Converte o tipo data para uma string com o formato de saída desejado.
+    # data = data.strftime('%d/%m/%Y')
+
+    print(f'\n{gerar_pessoa()}\n')
