@@ -29,6 +29,7 @@ from web_scraping import gerar_pessoa
 from display import *
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
 from PyQt5.QtCore import Qt, QTimer
+from threading import Thread
 
 
 class Pessoa(QMainWindow, Ui_MainWindow):
@@ -60,7 +61,13 @@ class Pessoa(QMainWindow, Ui_MainWindow):
         self._Sangue.installEventFilter(self)
         
         # Recarregando os dados ao clicar no botão
-        self.btnGerarPessoa.clicked.connect(self.carregar_dados)
+        self.btnGerarPessoa.clicked.connect(self.thread)  # Criando threads para não travar a interface
+        # self.btnGerarPessoa.clicked.connect(self.carregar_dados)  # Método antigo que trava a interface
+
+
+    def thread(self):
+        self.dados = Thread(target=self.carregar_dados)
+        self.dados.start()
 
 
     def eventFilter(self, obj, event):
